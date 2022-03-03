@@ -42,6 +42,7 @@ const core = __importStar(__nccwpck_require__(2186));
 const fs = __importStar(__nccwpck_require__(9225));
 const tar = __importStar(__nccwpck_require__(4674));
 const node_fetch_1 = __importDefault(__nccwpck_require__(6882));
+const process_1 = __nccwpck_require__(1765);
 function run() {
     var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function* () {
@@ -57,10 +58,12 @@ function run() {
             core.info(`windmillWorkspace: ${windmillWorkspace}`);
             core.info(`windmillUrl: ${windmillUrl}`);
             core.info(`scriptName: ${scriptName}`);
+            (0, process_1.chdir)(`./${inputDir}`);
+            core.info(`base directory: ${(0, process_1.cwd)()}`);
             yield tar.c({
                 gzip: false,
                 file: 'tarball.tar'
-            }, [inputDir]);
+            }, ['./']);
             core.info('tarball has been created');
             const content = yield fs.readFile('./tarball.tar', {
                 encoding: 'base64'
@@ -84,7 +87,7 @@ function run() {
                     core.setFailed(`error running script: ${output}`);
                 }
                 else {
-                    core.info(`script run uuid: ${output}`);
+                    core.info(`script run: ${windmillUrl}/run/${output}`);
                 }
             }
             else {
@@ -15378,6 +15381,14 @@ module.exports = require("os");
 
 "use strict";
 module.exports = require("path");
+
+/***/ }),
+
+/***/ 1765:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("process");
 
 /***/ }),
 

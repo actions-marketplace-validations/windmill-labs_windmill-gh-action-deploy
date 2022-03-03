@@ -2,6 +2,7 @@ import * as core from '@actions/core'
 import * as fs from 'fs/promises'
 import * as tar from 'tar'
 import fetch from 'node-fetch'
+import {chdir, cwd} from 'process'
 
 async function run(): Promise<void> {
   try {
@@ -20,12 +21,15 @@ async function run(): Promise<void> {
     core.info(`windmillUrl: ${windmillUrl}`)
     core.info(`scriptName: ${scriptName}`)
 
+    chdir(`./${inputDir}`)
+    core.info(`base directory: ${cwd()}`)
+
     await tar.c(
       {
         gzip: false,
         file: 'tarball.tar'
       },
-      [inputDir]
+      ['./']
     )
     core.info('tarball has been created')
     const content: string = await fs.readFile('./tarball.tar', {
@@ -53,7 +57,7 @@ async function run(): Promise<void> {
       if (fetchResponse.status >= 300) {
         core.setFailed(`error running script: ${output}`)
       } else {
-        core.info(`script run uuid: ${output}`)
+        core.info(`script run: ${windmillUrl}/run/${output}`)
       }
     } else {
       core.info(`skipping because of dry-run`)
