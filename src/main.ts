@@ -16,7 +16,9 @@ async function run(): Promise<void> {
     core.info(`dryRun: ${dryRun}`)
     core.info(`inputDir: ${inputDir}}`)
     core.info(`pathPrefix: ${pathPrefix}}`)
-    core.info(`windmillWorksace: ${windmillWorkspace}`)
+    core.info(`windmillWorkspace: ${windmillWorkspace}`)
+    core.info(`windmillUrl: ${windmillUrl}`)
+    core.info(`scriptName: ${scriptName}`)
 
     await tar.c(
       {
