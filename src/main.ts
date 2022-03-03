@@ -28,7 +28,7 @@ async function run(): Promise<void> {
       [inputDir]
     )
     core.info('tarball has been created')
-    const content: string = await fs.readFile('./tarball.tgz', {
+    const content: string = await fs.readFile('./tarball.tar', {
       encoding: 'base64'
     })
     const settings = {

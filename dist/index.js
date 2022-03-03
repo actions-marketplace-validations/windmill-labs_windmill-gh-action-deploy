@@ -62,7 +62,9 @@ function run() {
                 file: 'tarball.tar'
             }, [inputDir]);
             core.info('tarball has been created');
-            const content = yield fs.readFile('./tarball.tgz', { encoding: 'base64' });
+            const content = yield fs.readFile('./tarball.tar', {
+                encoding: 'base64'
+            });
             const settings = {
                 method: 'POST',
                 headers: {
