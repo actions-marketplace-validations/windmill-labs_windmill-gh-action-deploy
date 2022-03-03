@@ -53,7 +53,6 @@ async function run(): Promise<void> {
       core.info(`script run uuid: ${output}`)
     } else {
       core.info(`skipping because of dry-run`)
-
     }
   } catch (error: unknown) {
     if (error instanceof Error) {

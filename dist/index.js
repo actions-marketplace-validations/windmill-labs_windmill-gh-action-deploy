@@ -53,7 +53,7 @@ function run() {
             const windmillUrl = (_b = core.getInput('windmill_url')) !== null && _b !== void 0 ? _b : 'https://alpha.windmill.dev';
             const scriptName = (_c = core.getInput('script_name')) !== null && _c !== void 0 ? _c : 'u/bot/import_workspace_from_tarball';
             core.info(`dryRun: ${dryRun}`);
-            core.info(`inputDir: ${inputDir}}`);
+            core.info(`inputDir: ${inputDir}`);
             core.info(`windmillWorkspace: ${windmillWorkspace}`);
             core.info(`windmillUrl: ${windmillUrl}`);
             core.info(`scriptName: ${scriptName}`);
@@ -76,9 +76,15 @@ function run() {
                     tarball: content
                 })
             };
-            const fetchResponse = yield (0, node_fetch_1.default)(`${windmillUrl}/api/w/${windmillWorkspace}/jobs/run/p/${scriptName}`, settings);
-            const output = yield fetchResponse.text();
-            core.info(`script run uuid: ${output}`);
+            core.info(`uploading tarball...`);
+            if (!dryRun) {
+                const fetchResponse = yield (0, node_fetch_1.default)(`${windmillUrl}/api/w/${windmillWorkspace}/jobs/run/p/${scriptName}`, settings);
+                const output = yield fetchResponse.text();
+                core.info(`script run uuid: ${output}`);
+            }
+            else {
+                core.info(`skipping because of dry-run`);
+            }
         }
         catch (error) {
             if (error instanceof Error) {
