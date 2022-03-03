@@ -1,5 +1,5 @@
 name: "Deploy to windmill.dev"
-description: "An action to generate the changelog based on conventional commits"
+description: "Deploy the whole repo or a folder to a windmill.dev workspace"
 author: "windmill-labs"
 inputs:
   dry_run:
@@ -30,3 +30,6 @@ inputs:
 runs:
   using: "node16"
   main: "dist/index.js"
+branding:
+  icon: "send"
+  color: "blue"

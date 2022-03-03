@@ -1,6 +1,7 @@
 import * as core from '@actions/core'
 import * as fs from 'fs/promises'
 import * as tar from 'tar'
+import fetch from 'node-fetch'
 
 async function run(): Promise<void> {
   try {
