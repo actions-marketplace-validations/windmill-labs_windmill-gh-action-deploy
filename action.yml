@@ -16,9 +16,6 @@ inputs:
     description: "the input dir to deploy scripts from"
     required: false
     default: "./"
-  path_prefix:
-    description: "the path prefix to deploy to (e.g: u/user/foo)"
-    required: true
   windmill_url:
     description: "the base url of the windmill platform"
     required: false

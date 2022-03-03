@@ -7,7 +7,6 @@ async function run(): Promise<void> {
   try {
     const dryRun = core.getInput('dry_run') === 'true'
     const inputDir = core.getInput('input_dir') ?? './'
-    const pathPrefix = core.getInput('pathPrefix')
     const windmillToken = core.getInput('windmill_token')
     const windmillWorkspace = core.getInput('windmill_workspace')
     const windmillUrl = core.getInput('windmill_url') ?? 'https://alpha.windmill.dev'
@@ -15,7 +14,6 @@ async function run(): Promise<void> {
 
     core.info(`dryRun: ${dryRun}`)
     core.info(`inputDir: ${inputDir}}`)
-    core.info(`pathPrefix: ${pathPrefix}}`)
     core.info(`windmillWorkspace: ${windmillWorkspace}`)
     core.info(`windmillUrl: ${windmillUrl}`)
     core.info(`scriptName: ${scriptName}`)
