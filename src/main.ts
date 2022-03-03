@@ -15,7 +15,7 @@ async function run(): Promise<void> {
       core.getInput('script_name') ?? 'u/bot/import_workspace_from_tarball'
 
     core.info(`dryRun: ${dryRun}`)
-    core.info(`inputDir: ${inputDir}}`)
+    core.info(`inputDir: ${inputDir}`)
     core.info(`windmillWorkspace: ${windmillWorkspace}`)
     core.info(`windmillUrl: ${windmillUrl}`)
     core.info(`scriptName: ${scriptName}`)
@@ -42,12 +42,19 @@ async function run(): Promise<void> {
         tarball: content
       })
     }
-    const fetchResponse = await fetch(
-      `${windmillUrl}/api/w/${windmillWorkspace}/jobs/run/p/${scriptName}`,
-      settings
-    )
-    const output = await fetchResponse.text()
-    core.info(`script run uuid: ${output}`)
+    core.info(`uploading tarball...`)
+
+    if (!dryRun) {
+      const fetchResponse = await fetch(
+        `${windmillUrl}/api/w/${windmillWorkspace}/jobs/run/p/${scriptName}`,
+        settings
+      )
+      const output = await fetchResponse.text()
+      core.info(`script run uuid: ${output}`)
+    } else {
+      core.info(`skipping because of dry-run`)
+
+    }
   } catch (error: unknown) {
     if (error instanceof Error) {
       core.error(error.message)
