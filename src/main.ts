@@ -50,7 +50,11 @@ async function run(): Promise<void> {
         settings
       )
       const output = await fetchResponse.text()
-      core.info(`script run uuid: ${output}`)
+      if (fetchResponse.status >= 300) {
+        core.setFailed(`error running script: ${output}`)
+      } else {
+        core.info(`script run uuid: ${output}`)
+      }
     } else {
       core.info(`skipping because of dry-run`)
     }

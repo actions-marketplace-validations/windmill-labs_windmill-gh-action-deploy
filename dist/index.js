@@ -80,7 +80,12 @@ function run() {
             if (!dryRun) {
                 const fetchResponse = yield (0, node_fetch_1.default)(`${windmillUrl}/api/w/${windmillWorkspace}/jobs/run/p/${scriptName}`, settings);
                 const output = yield fetchResponse.text();
-                core.info(`script run uuid: ${output}`);
+                if (fetchResponse.status >= 300) {
+                    core.setFailed(`error running script: ${output}`);
+                }
+                else {
+                    core.info(`script run uuid: ${output}`);
+                }
             }
             else {
                 core.info(`skipping because of dry-run`);
