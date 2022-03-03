@@ -38,8 +38,9 @@ async function run(): Promise<void> {
         tarball: content
       })
     }
-    const fetchResponse = await fetch(`${windmillUrl}/api/w/${windmillWorkspace}/scripts/${scriptName}`, settings)
-    await fetchResponse.text()
+    const fetchResponse = await fetch(`${windmillUrl}/api/w/${windmillWorkspace}/jobs/run/p/${scriptName}`, settings)
+    const output = await fetchResponse.text()
+    core.info(`script run uuid: ${output}`)
   } catch (error: unknown) {
     if (error instanceof Error) {
       core.error(error.message)
