@@ -1,0 +1,32 @@
+name: "Deploy to windmill.dev"
+description: "An action to generate the changelog based on conventional commits"
+author: "windmill-labs"
+inputs:
+  dry_run:
+    description: "do not send a request to windmill"
+    required: false
+    default: "false"
+  windmill_token:
+    description: "the api token to authentify with"
+    required: true
+  windmill_workspace:
+    description: "the workspace to deploy to"
+    required: true
+  input_dir:
+    description: "the input dir to deploy scripts from"
+    required: false
+    default: "./"
+  path_prefix:
+    description: "the path prefix to deploy to (e.g: u/user/foo)"
+    required: true
+  windmill_url:
+    description: "the base url of the windmill platform"
+    required: false
+    default: "https://alpha.windmill.dev"
+  script_name:
+    description: "the script to trigger on the windmill workspace"
+    required: false
+    default: "u/bot/import_workspace_from_tarball"
+runs:
+  using: "node16"
+  main: "dist/index.js"
