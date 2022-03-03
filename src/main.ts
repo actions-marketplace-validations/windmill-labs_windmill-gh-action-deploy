@@ -9,8 +9,10 @@ async function run(): Promise<void> {
     const inputDir = core.getInput('input_dir') ?? './'
     const windmillToken = core.getInput('windmill_token')
     const windmillWorkspace = core.getInput('windmill_workspace')
-    const windmillUrl = core.getInput('windmill_url') ?? 'https://alpha.windmill.dev'
-    const scriptName = core.getInput('script_name') ?? 'u/bot/import_workspace_from_tarball'
+    const windmillUrl =
+      core.getInput('windmill_url') ?? 'https://alpha.windmill.dev'
+    const scriptName =
+      core.getInput('script_name') ?? 'u/bot/import_workspace_from_tarball'
 
     core.info(`dryRun: ${dryRun}`)
     core.info(`inputDir: ${inputDir}}`)
@@ -26,7 +28,9 @@ async function run(): Promise<void> {
       [inputDir]
     )
     core.info('tarball has been created')
-    const content: string = await fs.readFile('./tarball.tgz', { encoding: 'base64' })
+    const content: string = await fs.readFile('./tarball.tgz', {
+      encoding: 'base64'
+    })
     const settings = {
       method: 'POST',
       headers: {
@@ -38,7 +42,10 @@ async function run(): Promise<void> {
         tarball: content
       })
     }
-    const fetchResponse = await fetch(`${windmillUrl}/api/w/${windmillWorkspace}/jobs/run/p/${scriptName}`, settings)
+    const fetchResponse = await fetch(
+      `${windmillUrl}/api/w/${windmillWorkspace}/jobs/run/p/${scriptName}`,
+      settings
+    )
     const output = await fetchResponse.text()
     core.info(`script run uuid: ${output}`)
   } catch (error: unknown) {
