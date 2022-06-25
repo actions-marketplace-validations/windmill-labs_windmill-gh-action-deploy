@@ -2,7 +2,7 @@ import * as core from '@actions/core'
 import * as fs from 'fs/promises'
 import * as tar from 'tar'
 import fetch from 'node-fetch'
-import {chdir, cwd} from 'process'
+import { chdir, cwd } from 'process'
 
 async function run(): Promise<void> {
   try {
@@ -11,7 +11,7 @@ async function run(): Promise<void> {
     const windmillToken = core.getInput('windmill_token')
     const windmillWorkspace = core.getInput('windmill_workspace')
     const windmillUrl =
-      core.getInput('windmill_url') ?? 'https://alpha.windmill.dev'
+      core.getInput('windmill_url') ?? 'https://app.windmill.dev'
     const scriptName =
       core.getInput('script_name') ?? 'u/bot/import_workspace_from_tarball'
 

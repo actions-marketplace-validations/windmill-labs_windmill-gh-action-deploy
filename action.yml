@@ -19,7 +19,7 @@ inputs:
   windmill_url:
     description: "the base url of the windmill platform"
     required: false
-    default: "https://alpha.windmill.dev"
+    default: "https://app.windmill.dev"
   script_name:
     description: "the script to trigger on the windmill workspace"
     required: false
