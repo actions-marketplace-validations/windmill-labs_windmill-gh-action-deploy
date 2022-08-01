@@ -10,7 +10,7 @@
 ## Quickstart
 
 The action below would, at merge on main, deploy a repo based on the content
-locatet under the root path `starter`. It would deploy to the workspace
+located under the root path `starter`. It would deploy to the workspace
 `starter` using an api token stored as a secret.
 
 ```yaml
